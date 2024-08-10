@@ -19,7 +19,7 @@ def convert_sqft_to_num(x):
         return None
 
 data['total_sqft'] = data['total_sqft'].apply(convert_sqft_to_num)
-data = data.dropna(subset=['sqft'])
+data = data.dropna(subset=['total_sqft'])
 
 X = data[['size', 'total_sqft', 'bath', 'balcony', 'site_location']]
 y = data['price']
