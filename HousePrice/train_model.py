@@ -7,7 +7,7 @@ import pickle
 data = pd.read_csv('Pune house data.csv')
 
 data['size'] = data['size'].str.extract('(\d+)').astype(float)
-data = data.dropna(subset=['size', 'sqft', 'bath', 'balcony', 'price', 'site_location'])
+data = data.dropna(subset=['size', 'total_sqft', 'bath', 'balcony', 'price', 'site_location'])
 
 def convert_sqft_to_num(x):
     try:
@@ -18,10 +18,10 @@ def convert_sqft_to_num(x):
             return (float(tokens[0]) + float(tokens[1])) / 2
         return None
 
-data['sqft'] = data['sqft'].apply(convert_sqft_to_num)
+data['total_sqft'] = data['total_sqft'].apply(convert_sqft_to_num)
 data = data.dropna(subset=['sqft'])
 
-X = data[['size', 'sqft', 'bath', 'balcony', 'site_location']]
+X = data[['size', 'total_sqft', 'bath', 'balcony', 'site_location']]
 y = data['price']
 X = pd.get_dummies(X, columns=['site_location'])
 
